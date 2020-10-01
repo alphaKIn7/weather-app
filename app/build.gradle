@@ -26,9 +26,14 @@ android {
     }
 
     buildTypes {
+        debug{
+            buildConfigField 'String', "ApiKey" , OPEN_WEATHER_API_KEY
+            resValue 'string', "ApiKey" , OPEN_WEATHER_API_KEY
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', "ApiKey" , OPEN_WEATHER_API_KEY
         }
     }
 }

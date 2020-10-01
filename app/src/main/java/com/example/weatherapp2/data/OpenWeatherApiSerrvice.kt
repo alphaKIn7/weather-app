@@ -1,5 +1,6 @@
 package com.example.weatherapp2.data
 
+import com.example.weatherapp2.BuildConfig
 import com.example.weatherapp2.data.response.CurrentWeatherResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
@@ -13,7 +14,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 
-const val API_KEY = "e2e64c27495e1d561d1300da77fde5f4"
+const val API_KEY : String = BuildConfig.ApiKey
 const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
 
 private val moshi = Moshi.Builder()
