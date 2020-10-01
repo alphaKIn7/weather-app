@@ -1,12 +1,17 @@
 package com.example.weatherapp2.ui.weather.current
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp2.R
+import com.example.weatherapp2.data.OpenWeatherApi
+import kotlinx.android.synthetic.main.current_weather_fragment.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class CurrentWeatherFragment : Fragment() {
 
@@ -25,8 +30,12 @@ class CurrentWeatherFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CurrentWeatherViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = ViewModelProvider(this).get(CurrentWeatherViewModel::class.java)
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val currentWeatherResponse = OpenWeatherApi.retrofitSeervice.getCurrentWeather("London").await()
+            response.text = currentWeatherResponse.main.toString()
+        }
     }
 
 }
